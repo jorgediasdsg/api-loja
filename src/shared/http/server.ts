@@ -1,5 +1,5 @@
 import 'reflect-metadata';
-import express, { NextFunction, Request, Response } from 'express';
+import express, { Request, Response } from 'express';
 import 'express-async-errors';
 import cors from 'cors';
 import { errors } from 'celebrate';
@@ -19,27 +19,21 @@ app.use(routes);
 
 app.use(errors());
 
-app.use(
-  (
-    error: Error,
-    request: Request,
-    response: Response,
-    NextFunctiont: NextFunction,
-  ) => {
-    if (error instanceof AppError) {
-      return response.status(error.statusCode).json({
-        status: 'error',
-        message: error.message,
-      });
-    }
-
-    return response.status(500).json({
+app.use((error: Error, request: Request, response: Response) => {
+  if (error instanceof AppError) {
+    return response.status(error.statusCode).json({
       status: 'error',
-      message: 'Internal server error',
+      message: error.message,
     });
-  },
-);
+  }
+
+  return response.status(500).json({
+    status: 'error',
+    message: 'Internal server error',
+  });
+});
 
 app.listen(3333, () => {
+  // eslint-disable-next-line no-console
   console.log('Server up!🏆');
 });

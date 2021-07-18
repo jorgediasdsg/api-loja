@@ -1,7 +1,6 @@
 import multer from 'multer';
 import path from 'path';
 import crypto from 'crypto';
-import { FileHandle } from 'fs/promises';
 
 const uploadFolder = path.resolve(__dirname, '..', '..', 'uploads');
 
