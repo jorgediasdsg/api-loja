@@ -19,6 +19,8 @@ class SendForgotPasswordEmailService {
     }
 
     const token = await userTokenRepository.generated(user.id);
+    // eslint-disable-next-line no-console
+    console.log(token);
   }
 }
 
