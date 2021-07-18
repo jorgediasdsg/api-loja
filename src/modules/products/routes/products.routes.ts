@@ -3,7 +3,6 @@ import ProductsController from '../controllers/ProductsController';
 import { celebrate, Joi, Segments } from 'celebrate';
 
 const productsRouter = Router();
-
 const productsController = new ProductsController();
 
 productsRouter.get('/', productsController.index);
@@ -38,8 +37,6 @@ productsRouter.put(
       price: Joi.number().precision(2).required(),
       quantity: Joi.number().required(),
     },
-  }),
-  celebrate({
     [Segments.PARAMS]: {
       id: Joi.string().uuid().required(),
     },
