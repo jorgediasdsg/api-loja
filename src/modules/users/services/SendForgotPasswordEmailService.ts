@@ -18,6 +18,8 @@ class SendForgotPasswordEmailService {
       throw new AppError('User Not found');
     }
 
+    console.log(user);
+
     const token = await userTokenRepository.generated(user.id);
     // eslint-disable-next-line no-console
     console.log(token);
